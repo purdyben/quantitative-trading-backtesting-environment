@@ -7,3 +7,6 @@ starting High-Frequency Trading A Practical Guide to Algorithmic Strategies and 
 
 Currectly there are 3 things that need to be acomblished for each asset class: 
 data receival and procssessing, Stratagy creation though indicators and data historical data analysis, and Simulation/Visualization.  
+
+![Screen Shot 2020-10-22 at 10 19 54 PM](https://user-images.githubusercontent.com/43822429/96957309-e77d7500-14bf-11eb-9fde-3617f4b19cbd.png)
+
