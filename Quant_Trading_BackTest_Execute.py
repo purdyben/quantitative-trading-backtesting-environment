@@ -4,44 +4,55 @@ import PlotingResources.GraphPlot as plot
 import BackTraderResources.testTrader as btrader
 import binance as Binance
 import backtrader as bt
-import datetime
-from strats import TestStrategy
+from backtrader_plotting import Bokeh
+from backtrader_plotting.schemes import Tradimo
+
+# from strats import *
+from MyStrategys.placeHolder import *
+from MyStrategys.FirstStratagy import *
 
 def Main():
     """
     Gets selected data
     """
     # dataStream = DS.dataStream()
-    # df = dataStream.historicalData
-    # df = df.rename({'index': 'time'}, axis=1)
     print("#### Data Processing  ####")
     # btheaders = ['timestamp','open','high','low','close','volume','Close time','Quote asset volume','Number of trades', 'Taker buy base asset volume', 'Taker buy quote asset volume']
     # df = pd.read_csv("2020_BTCUSDT_1_Day.csv",names= btheaders)
-    # final_df = df[['timestamp','open','high','low','open','close','volume']]
-
-    """
+    # final_df = df[['open','high','low','close','volume']]
+    # final_df.reset_index(drop=True, inplace=True)
+    # final_df['date'] = (convertBinanceDates(df.index))
+    
+    # df = pd.read_csv("GSPC.csv")
+    # print(df.head)
+    """it
     create trader 
     """
     print("#### Creating Trader ####")
-    
-
     trader = btrader.trader()
-    # trader.addBinenceData(final_df)
-    
-    """
-    run trader
-    """
-    trader.addStrat(TestStrategy)
+    startBal = trader.getCash()
+    # """
+    # run trader
+    # """
+    trader.addStrat(TestStarat)
     trader.runCerebro()
-    
-    trader.printBal()
-    trader.plotBt();
+    print("Starting cash " + str(startBal))
+    trader.printBal('Ending')
     """
     Prints data 
     """
     print("#### Print Results ####")
-    # trader.plotBt();
-    # plot.PlotData(df,"yf", buy_signals=False,sell_signals=False)
+    b = Bokeh(style='bar', plot_mode='single')
+    
+    # plotconfig = {
+    #     'id:ind#0': dict(
+    #         subplot=True,
+    #     ),
+    # }
+    # b = Bokeh(style='bar', plot_mode='single', scheme=Blackly Scheme, plotconfig=plotconfig)
+    trader.plotBt(b)
+    
+   
 
 
 
