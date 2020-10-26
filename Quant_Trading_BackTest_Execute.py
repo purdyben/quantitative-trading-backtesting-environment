@@ -4,10 +4,12 @@ import PlotingResources.GraphPlot as plot
 import BackTraderResources.testTrader as btrader
 import binance as Binance
 import backtrader as bt
-import time
-import config, csv
+from backtrader_plotting import Bokeh
+from backtrader_plotting.schemes import Tradimo
 
-from strats import TestStrategy
+# from strats import *
+from MyStrategys.placeHolder import *
+from MyStrategys.FirstStratagy import *
 
 def Main():
     """
@@ -23,7 +25,7 @@ def Main():
     
     # df = pd.read_csv("GSPC.csv")
     # print(df.head)
-    """
+    """it
     create trader 
     """
     print("#### Creating Trader ####")
@@ -32,7 +34,7 @@ def Main():
     # """
     # run trader
     # """
-    trader.addStrat(TestStrategy)
+    trader.addStrat(TestStarat)
     trader.runCerebro()
     print("Starting cash " + str(startBal))
     trader.printBal('Ending')
@@ -40,8 +42,17 @@ def Main():
     Prints data 
     """
     print("#### Print Results ####")
-    trader.plotBt()
-    # plot.PlotData(df,"yf", buy_signals=False,sell_signals=False)
+    b = Bokeh(style='bar', plot_mode='single')
+    
+    # plotconfig = {
+    #     'id:ind#0': dict(
+    #         subplot=True,
+    #     ),
+    # }
+    # b = Bokeh(style='bar', plot_mode='single', scheme=Blackly Scheme, plotconfig=plotconfig)
+    trader.plotBt(b)
+    
+   
 
 
 

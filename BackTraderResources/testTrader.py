@@ -16,8 +16,11 @@ class trader():
         self.cerebro.broker.set_cash(num)
     def addData(self,data):
         self.cerebro.adddata(data)
-    def plotBt(self):
-         self.cerebro.plot()
+    def plotBt(self, Graph=None):
+        if Graph is None:
+            self.cerebro.plot()
+        else:
+            self.cerebro.plot(Graph)
     def runCerebro(self):
         self.cerebro.run()
     def addStrat(self,Strategy):
@@ -58,23 +61,43 @@ class trader():
         cerebro.adddata(CVS_data)
     def __init__(self):
         self.cerebro = bt.Cerebro()
-        CVS_data = bt.feeds.GenericCSVData(
-                        dataname='2020_BTCUSDT_1_Day.csv',
-                        # dtformat ( %Y-%m-%d %H:%M:%S),
-                        # Do not pass values before this date
-                        fromdate=datetime.datetime(2017, 1, 1),
-                        # Do not pass values after this date
-                        # todate=datetime.datetime(2020, 8, 21),
-                         timeframe=bt.TimeFrame.Days,
-                        datetime=0,
-                        high=2,
-                        low=3,
-                        open=1,
-                        close=4,
-                        volume=5,
-                        openinterest=-1)
+        # CVS_data = bt.feeds.GenericCSVData(
+        #                 dataname='2020_BTCUSDT_1_Day.csv',
+        #                 # dtformat ( %Y-%m-%d %H:%M:%S),
+        #                 # Do not pass values before this date
+        #                 fromdate=datetime.datetime(2017, 1, 1),
+        #                 # Do not pass values after this date
+        #                 # todate=datetime.datetime(2020, 8, 21),
+        #                  timeframe=bt.TimeFrame.Days,
+        #                 datetime=0,
+        #                 high=2,
+        #                 low=3,
+        #                 open=1,
+        #                 close=4,
+        #                 volume=5,
+        #                 openinterest=-1)
+        CVS_data = bt.feeds.YahooFinanceCSVData(dataname="GSPC.csv")
                     
         self.cerebro.adddata(CVS_data)
+        self.cerebro.addanalyzer(bt.analyzers.SharpeRatio)
+        self.cerebro.addanalyzer(bt.analyzers.SharpeRatio_A)
+        self.cerebro.addanalyzer(bt.analyzers.AnnualReturn)
+        self.cerebro.addanalyzer(bt.analyzers.DrawDown)
+        self.cerebro.addanalyzer(bt.analyzers.Returns)
+        self.cerebro.addanalyzer(bt.analyzers.TradeAnalyzer)
+        self.cerebro.addanalyzer(bt.analyzers.SQN)
         
+
+        # class backtrader.analyzers.AnnualReturn()
+        # class backtrader.analyzers.DrawDown()
+        # class backtrader.analyzers.GrossLeverage()
+        # class backtrader.analyzers.PyFolio()
+        # class backtrader.analyzers.LogReturnsRolling()
+        # class backtrader.analyzers.Returns()
+        # class backtrader.analyzers.SQN()
+        # class backtrader.analyzers.TradeAnalyzer()
+
+
+
        
        
